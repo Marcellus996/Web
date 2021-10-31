@@ -1,7 +1,20 @@
 ﻿@{
 	ViewBag.Title = "Index";
 }
-<h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<table style="width: 100%" border="1">
+	@foreach (var item in ViewBag.Products)
+	{
+	<tr>
+		<td>@item.Id</td>
+		<td>@item.Name</td>
+		<td>@item.Description</td>
+		<td>@item.Category</td>
+		<td>@item.Producer</td>
+		<td>@item.Supplier</td>
+		<td>@item.Price</td>
+	</tr>
+	}
+</table>
+

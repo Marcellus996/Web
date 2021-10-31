@@ -11,8 +11,12 @@ namespace WebApp.Controllers
 
 		public ActionResult Index()
 		{
-			ViewBag.Message = "Your application description page.";
-					
+			ViewBag.Message = "Products";
+
+			var dataProvider = new AppDataPathProvider(HttpContext);
+			var store = new Models.StoreJson(dataProvider);
+			ViewBag.Products = store.GetProducts();
+
 			return View();
 		}
 	}
