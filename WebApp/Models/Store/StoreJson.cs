@@ -38,6 +38,19 @@ namespace WebApp.Models
 			}
 		}
 
+		public Product GetProduct(string id)
+		{
+			var products = GetProducts();
+			for (var i = 0; i < products.Count; i++)
+			{
+				if (products[i].Id.Equals(id))
+				{
+					return products[i];
+				}
+			}
+			throw new KeyNotFoundException();
+		}
+
 		public List<Product> GetProducts()
 		{
 			string path = this.Provider.GetStorePath();

@@ -6,15 +6,29 @@
 <table style="width: 100%" border="1">
 	@foreach (var item in ViewBag.Products)
 	{
-	<tr>
-		<td>@item.Id</td>
-		<td>@item.Name</td>
-		<td>@item.Description</td>
-		<td>@item.Category</td>
-		<td>@item.Producer</td>
-		<td>@item.Supplier</td>
-		<td>@item.Price</td>
-	</tr>
+		<tr>
+			<td>@item.Id</td>
+			<td>@item.Name</td>
+			<td>@item.Description</td>
+			<td>@item.Category</td>
+			<td>@item.Producer</td>
+			<td>@item.Supplier</td>
+			<td>@item.Price</td>
+			<td>
+				@Html.ActionLink("Update", "Update", new { id = item.Id, htmlAttributes = new { @class = "btn btn-warning" } })
+			</td>
+
+			<td>
+				@using (Html.BeginForm("Delete", "Home", new { id = item.Id }))
+				{
+					<div class="form-actions">
+						<input type="submit" value="Delete" class="btn btn-danger" />
+					</div>
+				}
+			</td>
+		</tr>
 	}
 </table>
+
+@Html.ActionLink("Create", "Create", new { htmlAttributes = new { @class = "btn btn-success" } })
 

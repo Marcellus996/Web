@@ -7,6 +7,8 @@ namespace WebApp.Models
 {
 	public class Product
 	{
+		public Product() { }
+
 		public Product(string id, string name, string description, string category, string producer, string supplier, int price)
 		{
 			Id = id;
