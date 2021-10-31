@@ -10,5 +10,8 @@ namespace WebApp.Models
 	{
 		List<Product> GetProducts();
 
+		void UpsertProduct(Product product);
+
+		void DeleteProduct(string id);
 	}
 }

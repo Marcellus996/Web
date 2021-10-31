@@ -16,6 +16,28 @@ namespace WebApp.Models
 			this.Provider = Provider;
 		}
 
+		public void DeleteProduct(string id)
+		{
+			var products = GetProducts();
+			var newProducts = new List<Product>();
+
+			for (var i = 0; i < products.Count; i++)
+			{
+				if (products[i].Id.Equals(id))
+				{
+					continue;
+				}
+				newProducts.Add(products[i]);
+			}
+
+			string json = JsonConvert.SerializeObject(newProducts);
+			string path = this.Provider.GetStorePath();
+			using (StreamWriter w = new StreamWriter(path))
+			{
+				w.Write(json);
+			}
+		}
+
 		public List<Product> GetProducts()
 		{
 			string path = this.Provider.GetStorePath();
@@ -25,6 +47,29 @@ namespace WebApp.Models
 				return JsonConvert.DeserializeObject<List<Product>>(json);
 			}
 
+		}
+
+		public void UpsertProduct(Product product)
+		{
+			var products = GetProducts();
+			var newProducts = new List<Product>();
+
+			for (var i = 0; i < products.Count; i++)
+			{
+				if (products[i].Id.Equals(product.Id))
+				{
+					continue;
+				}
+				newProducts.Add(products[i]);
+			}
+			newProducts.Add(product);
+
+			string json = JsonConvert.SerializeObject(newProducts);
+			string path = this.Provider.GetStorePath();
+			using (StreamWriter w = new StreamWriter(path))
+			{
+				w.Write(json);
+			}
 		}
 	}
 }
